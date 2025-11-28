@@ -1,0 +1,167 @@
+:root {
+    --primary-red: #C0392B; /* Vermelho Dezembro Vermelho */
+    --primary-red-dark: #A93226; 
+    --hint-blue: #520000;
+    --hint-blue-dark: #6a0101;
+    --background-color: #760a0a;
+    --text-color: #000000;
+    --game-board-color: #927f7f;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#game-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 30px;
+    padding: 30px;
+    background-color: var(--game-board-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 900px;
+}
+
+/* ESTILOS DA FORCA */
+#hangman-drawing {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    border-bottom: 5px solid var(--primary-red);
+}
+
+.gallows-base, .gallows-pole, .gallows-top, .gallows-rope {
+    background-color: #333;
+    position: absolute;
+}
+
+.gallows-base { width: 150px; height: 10px; bottom: 0; left: 25px; background-color: var(--primary-red); }
+.gallows-pole { width: 10px; height: 100%; bottom: 0; left: 50px; }
+.gallows-top { width: 100px; height: 10px; top: 0; left: 50px; }
+.gallows-rope { width: 4px; height: 30px; top: 10px; right: 40px; background-color: #555; }
+
+/* PARTES DO CORPO */
+.body-part { position: absolute; background-color: var(--text-color); border-radius: 50%; visibility: hidden; }
+.head { width: 40px; height: 40px; top: 40px; right: 25px; border: 3px solid var(--primary-red); }
+.body { width: 4px; height: 60px; top: 85px; right: 42px; border-radius: 0; }
+.arm-left { width: 4px; height: 40px; top: 90px; right: 42px; transform: rotate(45deg); transform-origin: top center; }
+.arm-right { width: 4px; height: 40px; top: 90px; right: 42px; transform: rotate(-45deg); transform-origin: top center; }
+.leg-left { width: 4px; height: 50px; top: 140px; right: 42px; transform: rotate(45deg); transform-origin: top center; }
+.leg-right { width: 4px; height: 50px; top: 140px; right: 42px; transform: rotate(-45deg); transform-origin: top center; }
+
+/* ESTILOS DA ÁREA DE JOGO */
+#game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 300px;
+}
+
+#hint-display {
+    visibility: hidden;
+    font-size: 0.9em;
+    color: #000000;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    font-style: italic;
+    min-height: 18px;
+}
+
+.word-style {
+    font-size: 2em;
+    letter-spacing: 15px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+#letter-input {
+    padding: 10px;
+    width: 100px;
+    text-transform: uppercase;
+    text-align: center;
+    /* Correção: Remove borda padrão de foco que pode mudar de cor */
+    border: 2px solid #ccc;
+    outline: none; 
+}
+
+/* Correção: Define a borda ao focar para não usar a cor padrão do sistema */
+#letter-input:focus {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 5px rgba(192, 57, 43, 0.5);
+}
+
+
+/* ESTILOS DOS BOTÕES */
+#guess-button, #restart-button, .hint-btn {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.1s;
+    user-select: none; /* Correção: Evita seleção de texto/fundo em alguns navegadores */
+}
+
+/* Botões Principais */
+#guess-button, #restart-button {
+    padding: 10px 20px;
+    background-color: var(--primary-red);
+    color: rgb(50, 0, 0);
+}
+
+/* Ação ao Clicar (Active) nos Botões Principais */
+#guess-button:active, #restart-button:active {
+    background-color: var(--primary-red-dark);
+    transform: translateY(1px);
+    /* Correção: Garante que o fundo não seja transparente */
+    background-image: none; 
+}
+
+/* Botão de Dica */
+.hint-btn {
+    padding: 8px 15px;
+    margin-top: 15px;
+    background-color: var(--hint-blue);
+    color: rgb(0, 0, 0);
+}
+
+/* Ação ao Clicar (Active) no Botão de Dica */
+.hint-btn:active {
+    background-color: var(--hint-blue-dark);
+    transform: translateY(1px);
+    /* Correção */
+    background-image: none; 
+}
+
+.hint-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#message-area {
+    margin: 20px 0;
+    font-weight: bold;
+    color: var(--primary-red);
+}
+
+#wrong-letters {
+    margin-top: 20px;
+}
+
+#incorrect-letters-display {
+    font-size: 1.5em;
+    color: #000000;
+    letter-spacing: 5px;
+body, button, input {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+}
